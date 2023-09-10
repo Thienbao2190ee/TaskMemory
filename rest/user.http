@@ -1,0 +1,11 @@
+
+
+
+POST http://localhost:2222/api/user/register
+
+Content-Type: application/json
+{
+    "email": "nghiaomg3553@gmail.com",
+}
+###
+POST http://localhost:2222/api/user/login
