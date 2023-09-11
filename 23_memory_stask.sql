@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th9 10, 2023 lúc 01:27 PM
+-- Thời gian đã tạo: Th9 11, 2023 lúc 03:28 PM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -99,6 +99,28 @@ CREATE TABLE `team` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `todo`
+--
+
+CREATE TABLE `todo` (
+  `id` int NOT NULL,
+  `name` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `status` tinyint DEFAULT '1',
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `todo`
+--
+
+INSERT INTO `todo` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(4, 'code react', 1, '2023-09-11', NULL),
+(5, 'code node js', 1, '2023-09-11', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `user`
 --
 
@@ -144,6 +166,12 @@ ALTER TABLE `team`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `todo`
+--
+ALTER TABLE `todo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
@@ -176,6 +204,12 @@ ALTER TABLE `tags_project`
 --
 ALTER TABLE `team`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `todo`
+--
+ALTER TABLE `todo`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
