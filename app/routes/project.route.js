@@ -8,10 +8,10 @@ const { upload } = require("../middleware/uploadImage.middlware");
 
 module.exports = app => {
 
-    // router.get('/getall', 
-    //     jwtMiddleWare.isAuth,
-    //     projectController.getall 
-    // );
+    router.get('/getall', 
+        // jwtMiddleWare.isAuth,
+        projectController.getall 
+    );
 
     // router.get('/getbyid/:id', 
     //     jwtMiddleWare.isAuth, 

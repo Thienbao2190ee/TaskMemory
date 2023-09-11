@@ -4,17 +4,17 @@ const projectService = require("../services/project.service");
 
 // const {processAndSaveImage, deleteImage} = require('../utils/uploadImage')
 
-// exports.getall = async (req, res) => {
-//   try {
-//     projectService.getall((err, dataRes) => {
-//           if (err)
-//               return res.send({ result: false, error: [err] });
-//           return res.send({ result: true, data: dataRes });
-//     })
-//   } catch (err) {
-//       return res.send({ result: false, error: [err] });
-//   }
-// }
+exports.getall = async (req, res) => {
+  try {
+    projectService.getall((err, dataRes) => {
+          if (err)
+              return res.send({ result: false, error: [err] });
+          return res.send({ result: true, data: dataRes });
+    })
+  } catch (err) {
+      return res.send({ result: false, error: [err] });
+  }
+}
 
 // exports.getById = async (req, res) => {
 //   try {

@@ -38,6 +38,7 @@ require('./app/routes/user.route.js')(app)
 require('./app/routes/product.route.js')(app)
 require('./app/routes/photo.route')(app)
 require('./app/routes/project.route')(app)
+require('./app/routes/todo.route')(app)
 
 
 app.listen(port, function () {
