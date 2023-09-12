@@ -13,15 +13,15 @@ module.exports = app => {
         projectController.getall 
     );
 
-    // router.get('/getbyid/:id', 
-    //     jwtMiddleWare.isAuth, 
-    //     projectController.getById
-    // );
+    router.get('/getbyid/:id', 
+        // jwtMiddleWare.isAuth, 
+        projectController.getById
+    );
 
-    // router.post('/delete/:id', 
-    //     jwtMiddleWare.isAuth, 
-    //     projectController.delete
-    // );
+    router.post('/delete/:id', 
+        // jwtMiddleWare.isAuth, 
+        projectController.delete
+    );
 
     router.post('/create', 
         // jwtMiddleWare.isAuth,
@@ -29,11 +29,11 @@ module.exports = app => {
         projectController.create 
     );
 
-    // router.post('/update/:id', 
-    //     jwtMiddleWare.isAuth,
-    //     upload.single('image'),
-    //     projectController.update 
-    // );
+    router.post('/update/:id', 
+        // jwtMiddleWare.isAuth,
+        // upload.single('image'),
+        projectController.update 
+    );
 
     app.use('/api/project', router)
 }

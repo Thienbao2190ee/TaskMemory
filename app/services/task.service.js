@@ -1,6 +1,6 @@
 const db = require("../models/connectDb");
 const dbs = require("../models/connectDb").promise();
-const tableName = "project";
+const tableName = "task";
 // const Product = require("../models/product.model");
 const bcrypt = require('bcrypt');
 const {USER_CONST, QUERY_CONST} = require("../config/constant");
