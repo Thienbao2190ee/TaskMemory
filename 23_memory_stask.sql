@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th9 11, 2023 lúc 03:28 PM
+-- Thời gian đã tạo: Th9 12, 2023 lúc 05:13 PM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -48,7 +48,7 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `user_id`, `team_id`, `des`, `deadline`, `priority`, `type`, `name`, `image`, `short_des`, `created_at`, `updated_at`, `image_background`) VALUES
-(1, 1, NULL, NULL, NULL, NULL, NULL, 'gái', NULL, NULL, NULL, NULL, NULL),
+(1, 1, 1, NULL, NULL, NULL, NULL, 'gái', NULL, NULL, NULL, NULL, NULL),
 (2, 2, NULL, NULL, NULL, NULL, NULL, 'Ân', NULL, NULL, '2023-09-09', NULL, NULL),
 (3, 2, NULL, NULL, NULL, NULL, NULL, 'Ân cc', NULL, NULL, '2023-09-09', NULL, NULL);
 
@@ -84,17 +84,51 @@ CREATE TABLE `tags_project` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `task`
+--
+
+CREATE TABLE `task` (
+  `id` int NOT NULL,
+  `projectid` int NOT NULL,
+  `userid` int NOT NULL,
+  `type` int DEFAULT '1',
+  `name` varchar(255) NOT NULL,
+  `des` text,
+  `status` int DEFAULT '0',
+  `sort` int DEFAULT '1',
+  `publish` int DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `task`
+--
+
+INSERT INTO `task` (`id`, `projectid`, `userid`, `type`, `name`, `des`, `status`, `sort`, `publish`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, ' lau nha 222222222', ' des - 1', 1, 1, 1, NULL, '2023-09-12 17:10:01');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `team`
 --
 
 CREATE TABLE `team` (
   `id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `image` int DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `update_at` date DEFAULT NULL,
   `active` tinyint DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `team`
+--
+
+INSERT INTO `team` (`id`, `name`, `image`, `created_at`, `update_at`, `active`) VALUES
+(1, 'memory', '1', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -138,6 +172,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `test_pass`, `refresh_token`, `reset_refresh_token`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'bao', 'bao@gmail.com', '11111', '11111', NULL, NULL, 1, NULL, NULL);
+
+--
 -- Chỉ mục cho các bảng đã đổ
 --
 
@@ -157,6 +198,12 @@ ALTER TABLE `tags`
 -- Chỉ mục cho bảng `tags_project`
 --
 ALTER TABLE `tags_project`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `task`
+--
+ALTER TABLE `task`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -200,10 +247,16 @@ ALTER TABLE `tags_project`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `task`
+--
+ALTER TABLE `task`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `todo`
@@ -215,7 +268,7 @@ ALTER TABLE `todo`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
