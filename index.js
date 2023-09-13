@@ -40,6 +40,8 @@ require('./app/routes/photo.route')(app)
 require('./app/routes/project.route')(app)
 require('./app/routes/todo.route')(app)
 require('./app/routes/task.route')(app)
+require('./app/routes/team.route')(app)
+require('./app/routes/tags.route')(app)
 
 
 app.listen(port, function () {
