@@ -1,5 +1,4 @@
 const db = require("../models/connectDb");
-const dbs = require("../models/connectDb").promise();
 const tableName = "tags";
 // const Product = require("../models/product.model");
 const bcrypt = require('bcrypt');

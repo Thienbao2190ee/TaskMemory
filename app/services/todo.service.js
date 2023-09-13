@@ -1,5 +1,7 @@
 const db = require("../models/connectDb");
 const dbs = require("../models/connectDb").promise();
+const rootService = require("../services/root.service")
+
 const tableName = "todo";
 // const Product = require("../models/product.model");
 const bcrypt = require('bcrypt');
@@ -32,6 +34,9 @@ exports.create = async (data, result) => {
         data.created_at = new Date();
 
         const checknameQuery = `SELECT COUNT(*) as count FROM ${tableName} WHERE name = ?`;
+        
+        // rootService.isExists(tableName,data) => {}
+        
         db.query(checknameQuery, [data.name], (nameErr, nameResult) => {
             if (nameErr) {
                 return result({ msg: 'Lỗi kiểm tra name' }, null);

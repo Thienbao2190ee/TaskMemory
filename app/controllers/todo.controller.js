@@ -1,15 +1,14 @@
 const db = require("../models/connectDb");
 const { validationResult } = require("express-validator");
 const todoService = require("../services/todo.service");
-
-// const {processAndSaveImage, deleteImage} = require('../utils/uploadImage')
+const rootService = require("../services/root.service")
 
 exports.getall = async (req, res) => {
   try {
-    todoService.getall((err, dataRes) => {
+    rootService.getall('todo', 1, 10,(err, dataRes) => {
           if (err)
               return res.send({ result: false, error: [err] });
-          return res.send({ result: true, data: dataRes });
+          return res.send({ result: true, ...dataRes });
     })
   } catch (err) {
       return res.send({ result: false, error: [err] });
@@ -93,36 +92,6 @@ exports.update = async (req, res) => {
                 updated_at : new Date ,
             };
 
-            // Kiểm tra nếu có tệp ảnh mới được tải lên.
-            // if (req.file && req.body.image != 'undefined') {
-            //     if (req.file.size > 1000000) {
-            //         return res.send({
-            //             result: false,
-            //             error: [{msg: 'File gửi không được lớn hơn 1MB'}]
-            //         });
-            //     } else {
-            //         deleteImage(dataRes?.image)
-            //         deleteImage(dataRes?.thumb)
-            //         deleteImage(dataRes?.webps)
-            //         deleteImage(dataRes?.webps_thumb)
-            //         const processedImagePaths = await new Promise((resolve, reject) => {
-            //             processAndSaveImage(req.file, 200, 200, (err, paths) => {
-            //                 if (err) {
-            //                     reject(err);
-            //                 } else {
-            //                     resolve(paths);
-            //                 }
-            //             });
-            //         });
-
-            //         data = {
-            //             ...data,
-            //             ...processedImagePaths
-            //         };
-            //     }
-            // }
-            // if( req.body.image == 'undefined' ) data.image = dataRes.image
-
             // Cập nhật bản ghi với dữ liệu mới
             todoService.update(id, data, (errss, dataRes) => {
                 if (errss)
@@ -148,17 +117,47 @@ exports.update = async (req, res) => {
         });
     }
 };
-// exports.update_status = async (req,res) => {
-//     try {
-//         const id = req.params.id
 
-//         const {status } = req.body
+exports.changeStatus = async (req, res) => {
+  try {
+      const id = req.params.id;
+      const status = req.params.status
 
 
-//     } catch () {
-        
-//     }
-// }
+      newsService.getById(id, (err , dataRes) => {
+          if (status == null || typeof status === 'undefined')
+              data.status = dataRes.status
+          
+          // if (sort == null || typeof sort === 'undefined')
+          //     data.sort = dataRes.sort    
+  
+          // if (hot == null || typeof hot === 'undefined')
+          //     data.hot = dataRes.hot
+
+          newsService.update(id, data, (errss, dataRes) => {
+              if (errss)
+                  return res.send({
+                      result: false,
+                      ...errss
+                  });
+              newsService.getById(id, (err , dataRes) => {
+                  return res.send({
+                      result: true,
+                      msg: 'Cập nhật dữ liệu thành công',
+                      data: dataRes
+                  });
+              })
+          });
+      });
+
+  } catch (err) {
+      return res.send({
+          result: false,
+          msg: 'Máy chủ xảy ra lỗi!',
+          error: []
+      });
+  }
+}
 
   
 
