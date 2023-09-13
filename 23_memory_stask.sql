@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th9 12, 2023 lúc 05:13 PM
+-- Thời gian đã tạo: Th9 13, 2023 lúc 06:52 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.1.10
 
@@ -60,12 +60,19 @@ INSERT INTO `project` (`id`, `user_id`, `team_id`, `des`, `deadline`, `priority`
 
 CREATE TABLE `tags` (
   `id` int NOT NULL,
-  `name` int NOT NULL,
+  `name` varchar(255) NOT NULL,
   `color` varchar(255) DEFAULT NULL,
   `publish` tinyint DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `color`, `publish`, `created_at`, `updated_at`) VALUES
+(1, 'memory-1 update', '#2196f3', 1, '2023-09-13', NULL);
 
 -- --------------------------------------------------------
 
@@ -128,7 +135,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`id`, `name`, `image`, `created_at`, `update_at`, `active`) VALUES
-(1, 'memory', '1', NULL, NULL, 1);
+(4, 'memory-2', 'anh.jpg', '2023-09-13', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -238,7 +245,7 @@ ALTER TABLE `project`
 -- AUTO_INCREMENT cho bảng `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `tags_project`
@@ -256,7 +263,7 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT cho bảng `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `todo`
